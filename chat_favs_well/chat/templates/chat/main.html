@@ -1,0 +1,33 @@
+{% extends 'base_bootstrap.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+</head>
+<body style="background-color:teal; color:white;">
+{% block content %}
+
+<p>Howdy - Lets get some JSON</p>
+<p id="back">This text will be replaced in 2 seconds</p>
+<p>
+
+<a href="{% url 'chat:syntax' %}" target="_new">JSON and JavaScript</a> |
+<a href="{% url 'chat:jsonfun' %}" target="_blank">JSON Endpoint</a>  |
+    <a href="{% url 'chat:talk' %}" target="_blank">Lets Chat</a>   |
+    <a href="{% url 'chat:log' %}" target="_blank">Log in</a>
+</p>{% comment %}{% endcomment %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.getJSON('{% url 'chat:jsonfun' %}', function(data){
+            $('#back').html(data.first);
+            console.log(data);
+        })
+    })
+</script>
+{% endblock content %}
+</body>
+</html>
